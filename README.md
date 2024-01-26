@@ -1,41 +1,44 @@
-# ALAB 319.5.1: Working with Mongoose
+# ALAB 319.4.1: Aggregations, Indexes, and Validation
 
 Version 1.0, 07/31/23
-GitHub Repo.:  [Click here](https://github.com/HichamBenkada/MongoDB_to_Mongoose) to open in a separate window.
+GitHub Repo.:  [Click here](https://github.com/HichamBenkada/ExpressAPI_MongooseAggregation) to open in a separate window.
 
-## Introduction: 
+## Introduction:
 
-This is a Node.js project is build using MongoDB native driver and my objective is to refactor the existing application, changing from the standard MongoDB Node driver to Mongoose.
+This project expands the Grades REST API application to include additional features for aggregations, indexes, and validation.
 
-## Objective:
-
-- Downloading the final example here in [CodeSandbox](https://codesandbox.io/p/devbox/express-building-a-restful-api-9-hg34yn)
-- Renaming the project directory as appropriate.
-- Running git init to establish a git repository within the directory.
-- Running npm install to install the application dependencies.
-- Adding my own environment variables to enable connection to Mongo database.
-- Testing the application by running nodemon index.js and navigating to localhost:3000.
-- Commiting frequently to my Git repository throughout the assignment,
-
+## Objectives:
+- Adding additional features to an existing MongoDB + Express CRUD API.
+- Refactoring existing code for efficiency, organization, and/or performance.
 
 ### Part 1: Exploring Existing Operations
-Taking a few minutes to explore the existing code and Making sure I am familiar with the structure and functionality of what I will be working with.This step is very important whenever I am given somebody else's code to work on, it is crucial to take the appropriate time to understand it before attempting modifications and improvements.
+Taking a few minutes to explore the existing code is important to make sure we are familiar with the structure and functionality of what we will be working with. Whenever we are given somebody else's code to work on, it is crucial to take the appropriate time to understand it before attempting modifications and improvements.
 
-### Part 2: Refactoring to Mongoose
-My task is to completely remove the MongoDB driver from the application, and instead, use Mongoose for all database interactions.
+### Part 2: Adding Additional Features
+Our task is to add the following additional features, and any code necessary to make them work as described. The pre-existing code should remain functional! Assume that we have clients actively using the existing code, so maintaining it is necessary for the health of the application.
 
-Something to remember, I can add additional features along the way of refactoring this code while preserving the application functionality as the original.
+*Creating the following features, using good organizational and coding practices:*
+- Create a GET route at /grades/stats
+Within this route, create an aggregation pipeline that returns the following information:
+The number of learners with a weighted average (as calculated by the existing routes) higher than 70%.
+The total number of learners.
+The percentage of learners with an average above 70% (a ratio of the above two outputs).
 
-thinking about what I should change first. I did not delete the MongoDB driver code immediately! Instead I commented it out to use it as a reference and I continue to code alongside it in order to ensure I have everything in place.
+- Create a GET route at /grades/stats/:id
+Within this route, mimic the above aggregation pipeline, but only for learners within a class that has a class_id equal to the specified :id.
+- Create a single-field index on class_id.
+- Create a single-field index on learner_id.
+- Create a compound index on learner_id and class_id, in that order, both ascending.
 
-<!-- 
-make a module schema grades module...validation... add a user module relationship vertual property and static methodes and 
- -->
+*Create the following validation rules on the grades collection:*
+Each document must have a class_id field, which must be an integer between 0 and 300, inclusive.
+Each document must have a learner_id field, which must be an integer greater than or equal to 0.
+Change the validation action to "warn."
+
 ### Part 3: Testing
-Testing my application's functionality and making sure that everything works as expected.
-If my code does not work, I left comments for myself explaining potential next steps, so I can revisit the application in the future and approach the problem again from a new perspective.
+Testing features and Making sure that everything works as expected.
 
 ### Part 4: Completion
-The project is successfully pushed to Github using git version control and the repository link is submitted to Canvas, the PerScholas assignment folder.
+the completted github repo. of the project is submitted to Canvas.
 
-_Thank you for your time! looking forward to hear your comments and tips how to improve and make this project better_
+_Thank you for your time! looking forward to hear your comments and feedback to develop and make this project better_
